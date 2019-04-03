@@ -4,10 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CLIArgs.fs" />
     <Compile Include="GitignoreGenerator.App.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Argu" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

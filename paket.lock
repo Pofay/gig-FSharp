@@ -9,6 +9,8 @@ NUGET
     FSharp.Data (3.0.1)
       FSharp.Core (>= 4.0.0.1) - restriction: && (>= net45) (>= netstandard2.0)
       FSharp.Core (>= 4.3.4) - restriction: && (< net45) (>= netstandard2.0)
+    FSharpPlus (1.0)
+      FSharp.Core (>= 4.3.4)
     Microsoft.NETCore.Platforms (2.2) - restriction: >= netcoreapp2.0
     System.Buffers (4.5) - restriction: || (&& (< monoandroid) (< netstandard1.1) (>= netstandard2.0) (< win8)) (&& (>= monotouch) (>= netstandard2.0)) (&& (< net45) (>= net461) (>= netstandard2.0)) (&& (< net45) (< netcoreapp2.0) (>= netstandard2.0) (< xamarinios)) (&& (< netstandard1.1) (>= netstandard2.0) (>= win8)) (&& (>= netstandard2.0) (>= xamarinmac)) (&& (>= netstandard2.0) (>= xamarintvos)) (&& (>= netstandard2.0) (>= xamarinwatchos))
     System.Configuration.ConfigurationManager (4.5) - restriction: && (< net45) (>= netstandard2.0)
