@@ -38,23 +38,25 @@ let unsafeGetCurrentDirectory = Environment.CurrentDirectory + "/.gitignore"
 
 [<EntryPoint>]
 let main argv =
-    let parser = ArgumentParser.Create<CLIArgs.CLIArguments>(programName = "gig.exe")
+    let parser = ArgumentParser.Create<CLIArgs.CLIArguments>()
     let api = "https://www.gitignore.io/api/"
 
-    let results = parser.Parse(argv)
+    try 
+      let results = parser.ParseCommandLine(inputs = argv, raiseOnUsage = true)
 
-    let ignoreTagsOrNone = results.TryGetResult CLIArgs.CLIArguments.Ignore_Tags
-    let directory = results.TryGetResult CLIArgs.CLIArguments.Directory 
-                  |> map(fun dir -> dir + "/.gitignore") 
-                  |> Option.defaultValue unsafeGetCurrentDirectory
+      let tagsOrNone = results.TryGetResult CLIArgs.CLIArguments.Ignore_Tags
+      let directory = results.TryGetResult CLIArgs.CLIArguments.Directory 
+                    |> map(fun dir -> dir + "/.gitignore") 
+                    |> Option.defaultValue unsafeGetCurrentDirectory
 
-    let operation = results.TryGetResult CLIArgs.CLIArguments.Mode 
-                 |> Option.defaultValue "overwrite"
-                 |> determineMode directory
+      let operation = results.TryGetResult CLIArgs.CLIArguments.Mode 
+                   |> Option.defaultValue "overwrite"
+                   |> determineMode directory
     
     
-    ignoreTagsOrNone |> (fetchGitIgnoreOrDoNothing api >=> operation) |> Async.RunSynchronously
-
+      tagsOrNone |> (fetchGitIgnoreOrDoNothing api >=> operation) |> Async.RunSynchronously
+    with e ->
+      printfn "%s" e.Message
     0
 
 
